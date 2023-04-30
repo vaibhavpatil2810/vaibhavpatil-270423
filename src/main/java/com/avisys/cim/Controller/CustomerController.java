@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,6 +51,20 @@ public class CustomerController {
 		else
 		{
 			return new ResponseEntity("Customer added successfully", HttpStatus.CREATED);
+		}
+	}
+	
+	@DeleteMapping("/customers")
+	public ResponseEntity deleteCustomer(@RequestParam String mobileNo)
+	{
+		boolean status = CService.deleteCustomer(mobileNo);
+		if(status == false)
+		{
+			return new ResponseEntity("Unable to delete Customer.",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		else
+		{
+			return new ResponseEntity("Customer deleted successfully", HttpStatus.OK);
 		}
 	}
 	

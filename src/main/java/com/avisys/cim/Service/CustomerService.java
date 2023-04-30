@@ -11,6 +11,8 @@ public interface CustomerService {
 
 	boolean insertCustomer(CustomerDTO customerDto);
 
+	boolean deleteCustomer(String mobileNo);
+
 	//Customer addNewCustomer(Customer customer);
 
 	//boolean addCustomer(Customer c);

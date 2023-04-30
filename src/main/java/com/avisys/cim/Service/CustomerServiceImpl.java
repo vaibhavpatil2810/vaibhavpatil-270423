@@ -104,6 +104,33 @@ public class CustomerServiceImpl implements CustomerService{
 		return true;
 	}
 
+	@Override
+	public boolean deleteCustomer(String mobileNo) {
+		List<CustomerDTO> cDto =  getCustomers(null, null, mobileNo);
+		if(cDto != null)
+		{
+			Customer newCustomer = new Customer(cDto.get(0).getFirstName(), cDto.get(0).getLastName());
+			List<MobileNumber> newMobileNumbers = new ArrayList<>();
+			
+			
+			
+			for(String mobilenumber : cDto.get(0).getMobileNumbers())
+			{
+				newMobileNumbers.add(new MobileNumber(mobilenumber, newCustomer));
+			}
+			
+			newCustomer.setMobileNumbers(newMobileNumbers);
+			customerDao.delete(newCustomer);
+			return true;
+		}
+		else
+		{			
+			return false;
+		}
+		
+	}
+
+	
 
 
 	

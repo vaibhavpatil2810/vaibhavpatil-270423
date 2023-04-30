@@ -6,8 +6,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.avisys.cim.Customer;
 import com.avisys.cim.Dao.CustomerDao;
+import com.avisys.cim.beans.Customer;
+import com.avisys.cim.beans.CustomerDTO;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -16,43 +17,62 @@ public class CustomerServiceImpl implements CustomerService{
 	CustomerDao customerDao;
 
 	@Override
-	public List<Customer> getCustomers(String firstName, String lastName, String mobileNumber) {
+	public List<CustomerDTO> getCustomers(String firstName,String lastName,String mobileNumber) {
 		
 		List<Customer> CList = customerDao.findAll();
+		List<CustomerDTO> CustomerDTOList = CList.stream().map(CustomerDTO::new).collect(Collectors.toList());
 		if(firstName == null && lastName == null && mobileNumber == null)
 		{
-			return CList;
+			return CustomerDTOList;
 		}
 		if(firstName != null)
 		{
-			CList = CList.stream().filter(c -> c.getFirstName().toLowerCase().contains(firstName.toLowerCase()))
+			CustomerDTOList = CustomerDTOList.stream().filter(c -> c.getFirstName().toLowerCase().contains(firstName.toLowerCase()))
 					.collect(Collectors.toList());
 		}
 		if(lastName != null)
 		{
-			CList = CList.stream().filter(c -> c.getLastName().toLowerCase().contains(lastName.toLowerCase()))
+			CustomerDTOList = CustomerDTOList.stream().filter(c -> c.getLastName().toLowerCase().contains(lastName.toLowerCase()))
 					.collect(Collectors.toList());
 		}
 		if(mobileNumber != null)
 		{
-			CList = CList.stream().filter(c -> c.getMobileNumber().equals(mobileNumber))
-					.collect(Collectors.toList());
+			CustomerDTO matchedCustomer = null;
+			for(CustomerDTO customerDto : CustomerDTOList)
+			{
+				List<String> IndividualCustomerMobileNumberList = customerDto.getMobileNumbers();
+				for(String number : IndividualCustomerMobileNumberList)
+				{
+					
+					if(number.equals(mobileNumber))
+					{
+						System.out.println("in if");
+						matchedCustomer = customerDto;
+						break;
+					}
+				}
+			}
+			CustomerDTOList.clear();
+			CustomerDTOList.add(matchedCustomer);
 		}
-		return CList;
+		return CustomerDTOList;
+		
+		
 	}
 
-	@Override
-	public Customer addNewCustomer(Customer customer) {
-		Customer c = customerDao.findByMobileNumber(customer.getMobileNumber());
-		if(c != null)
-		{
-			return null;
-		}
-		else
-		{
-			return customerDao.save(customer);
-		}
-	}
+//	@Override
+//	public Customer addNewCustomer(Customer customer) {
+//		Customer c = customerDao.findByMobileNumber("jhhg");//customer.getMobileNumber()
+//		if(c != null)
+//		{
+//			return null;
+//		}
+//		else
+//		{
+//			return customerDao.save(customer);
+//		}
+//	}
+
 
 
 //	@Override

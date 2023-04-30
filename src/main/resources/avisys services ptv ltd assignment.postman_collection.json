@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "2a6bf077-7d13-46ca-a59a-62a5596efef1",
+		"name": "avisys services ptv ltd assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26120324"
+	},
+	"item": [
+		{
+			"name": "get all customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"customers"
+					]
+				},
+				"description": "to get all customers list"
+			},
+			"response": []
+		},
+		{
+			"name": "getByFirstname",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/customers?firstName=alan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "firstName",
+							"value": "alan"
+						}
+					]
+				},
+				"description": "get customer using firstname"
+			},
+			"response": []
+		},
+		{
+			"name": "getbylastname",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/customers?lastName=sm",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "lastName",
+							"value": "sm"
+						}
+					]
+				},
+				"description": "retrieve data using lastname "
+			},
+			"response": []
+		},
+		{
+			"name": "getByMobileNumber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/customers?mobileNumber=9111111111",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "mobileNumber",
+							"value": "9111111111"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n        \"firstName\": \"vaibhav\",\r\n        \"lastName\": \"patil\",\r\n        \"mobileNumber\": \"8149676721\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customer/addnewcustomer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"addnewcustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllcustomersWithMobileNO",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getbyname",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/customers?firstname=j",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "j"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insertwithmultiplenum",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"firstName\": \"vaibhav\",\r\n        \"lastName\": \"patil\",\r\n        \"mobileNumbers\": [\r\n            \"2948724424\",\r\n            \r\n            \"2782478244\"\r\n        ]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customer/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

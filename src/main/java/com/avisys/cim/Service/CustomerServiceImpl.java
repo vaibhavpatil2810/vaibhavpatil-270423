@@ -1,5 +1,6 @@
 package com.avisys.cim.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.avisys.cim.Dao.CustomerDao;
 import com.avisys.cim.beans.Customer;
 import com.avisys.cim.beans.CustomerDTO;
+import com.avisys.cim.beans.MobileNumber;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -60,36 +62,50 @@ public class CustomerServiceImpl implements CustomerService{
 		
 	}
 
-//	@Override
-//	public Customer addNewCustomer(Customer customer) {
-//		Customer c = customerDao.findByMobileNumber("jhhg");//customer.getMobileNumber()
-//		if(c != null)
-//		{
-//			return null;
-//		}
-//		else
-//		{
-//			return customerDao.save(customer);
-//		}
-//	}
+	@Override
+	public boolean insertCustomer(CustomerDTO cDto) {
+		
+		List<String> newCustomerMobileNumberList = cDto.getMobileNumbers();
+		List<Customer> CustomerList = customerDao.findAll();
+		List<MobileNumber> MobileNumbersList = new ArrayList<>();
+		for(Customer existingCustomer : CustomerList)
+		{
+			
+			MobileNumbersList.addAll(existingCustomer.getMobileNumbers()); 
+		}
+				
+		for(String newNumber : newCustomerMobileNumberList)
+		{
+			for(MobileNumber existingNumber : MobileNumbersList)
+			{
+				
+				if(newNumber.equals(existingNumber.toString()))
+				{
+					
+					return false;
+				}
+			}
+		}
+		
+		Customer newCustomer = new Customer(cDto.getFirstName(), cDto.getLastName());
+		List<MobileNumber> newMobile = new ArrayList<>();
+
+
+		
+		for(String mobileNumber : cDto.getMobileNumbers())
+		{
+			newMobile.add(new MobileNumber(mobileNumber, newCustomer));
+		}
+
+
+		
+		newCustomer.setMobileNumbers(newMobile);
+		customerDao.save(newCustomer);
+		return true;
+	}
 
 
 
-//	@Override
-//	public boolean addCustomer(Customer c) {
-//
-//		Customer customer=customerDao.findByMobileNumber(c.getMobileNumber());
-//		if(customer!=null)
-//		{
-//			return false;
-//		}
-//		else
-//		{
-//			customerDao.save(c);
-//			return true;
-//		}
-//		
-//	}
 	
 
 }

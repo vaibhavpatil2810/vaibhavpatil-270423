@@ -9,6 +9,8 @@ public interface CustomerService {
 
 	List<CustomerDTO> getCustomers(String firstName,String lastName,String mobileNumber);
 
+	boolean insertCustomer(CustomerDTO customerDto);
+
 	//Customer addNewCustomer(Customer customer);
 
 	//boolean addCustomer(Customer c);

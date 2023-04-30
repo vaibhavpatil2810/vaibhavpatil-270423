@@ -37,32 +37,20 @@ public class CustomerController {
 	    return ResponseEntity.ok(customerDTOs);
 	}
 	
-//	@PostMapping("/customers")
-//	public ResponseEntity<Customer> insertCustomer(@RequestBody Customer c)
-//	{
-//		boolean status=CService.addCustomer(c);
-//		if(status)
-//		{
-//			return new ResponseEntity("Unable to create Customer. Mobile number already present.",HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
-//		else
-//		{
-//			return new ResponseEntity("Customer added successfully", HttpStatus.CREATED);
-//		}
-//	}
 	
-//	@PostMapping("/addnewcustomer")
-//	public ResponseEntity<Customer> addNewCustomer(@RequestBody Customer customer)
-//	{
-//		Customer c = CService.addNewCustomer(customer);
-//		if(c == null)
-//		{
-//			return new ResponseEntity("Unable to create Customer. Mobile number already present.",HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
-//		else 
-//		{
-//			return new ResponseEntity("Customer added successfully", HttpStatus.CREATED);
-//		}
-//	}
+	@PostMapping("/customers")
+	public ResponseEntity addNewCustomer(@RequestBody CustomerDTO customerDto)
+	{
+		
+		boolean status = CService.insertCustomer(customerDto);
+		if(status == false)
+		{
+			return new ResponseEntity("Unable to create Customer. Mobile number already present.",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		else
+		{
+			return new ResponseEntity("Customer added successfully", HttpStatus.CREATED);
+		}
+	}
 	
 }

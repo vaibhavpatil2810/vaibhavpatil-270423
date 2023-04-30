@@ -36,6 +36,20 @@ public class Customer {
 	 @JsonIgnore
 	 private List<MobileNumber> mobileNumbers = new ArrayList<>();
 
+
+
+	public Customer(String firstName, String lastName) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	
+	public Customer() {
+		super();
+	}
+
+
 	public Long getId() {
 		return id;
 	}

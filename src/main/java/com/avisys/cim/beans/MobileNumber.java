@@ -38,6 +38,13 @@ public class MobileNumber {
 			super();
 		}
 
+
+		public MobileNumber(String number, Customer customer) {
+			super();
+			this.number = number;
+			this.customer = customer;
+		}
+
 		public Long getId() {
 			return id;
 		}

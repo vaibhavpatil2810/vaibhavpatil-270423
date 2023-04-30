@@ -41,7 +41,18 @@ public class CustomerServiceImpl implements CustomerService{
 		return CList;
 	}
 
-	
+	@Override
+	public Customer addNewCustomer(Customer customer) {
+		Customer c = customerDao.findByMobileNumber(customer.getMobileNumber());
+		if(c != null)
+		{
+			return null;
+		}
+		else
+		{
+			return customerDao.save(customer);
+		}
+	}
 
 
 //	@Override

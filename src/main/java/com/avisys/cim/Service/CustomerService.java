@@ -8,7 +8,7 @@ public interface CustomerService {
 
 	List<Customer> getCustomers(String fname, String lname, String mobileNo);
 
-	
+	Customer addNewCustomer(Customer customer);
 
 	//boolean addCustomer(Customer c);
 

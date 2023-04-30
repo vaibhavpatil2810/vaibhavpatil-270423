@@ -40,7 +40,19 @@ public class CustomerController {
 	}
 	
 
-	
+	@PostMapping("/addnewcustomer")
+	public ResponseEntity<Customer> addNewCustomer(@RequestBody Customer customer)
+	{
+		Customer c = CService.addNewCustomer(customer);
+		if(c == null)
+		{
+			return new ResponseEntity("Unable to create Customer. Mobile number already present.",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		else 
+		{
+			return new ResponseEntity("Customer added successfully", HttpStatus.CREATED);
+		}
+	}
 
 	
 }
